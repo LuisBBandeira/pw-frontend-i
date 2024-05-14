@@ -1,0 +1,48 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+*{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.quadro{
+    height: auto;
+    width: 250px;
+    background-color: #ccc;
+    padding: 10px;
+    padding-left: 10px;
+}
+
+.date{
+    text-align: end;
+}
+
+@media screen and (orientation:landscape) { 
+
+    body{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .quadro{
+        
+        display: flex;
+        flex-direction: row;
+        margin-top: 8%;
+        width: 100%;
+    }
+
+   h2{
+    font-size: 1.2em;
+   }
+
+    .text{
+        padding-left: 10px;
+    }
+}

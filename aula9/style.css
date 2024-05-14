@@ -1,0 +1,12 @@
+:root{
+    --color-primary: #e2d40a;
+    --color-secondary: #2a98a7;
+    --color-text: #222;
+    --speed:1s;
+
+    --gallery-width:200px;
+}
+
+*{
+    
+}
