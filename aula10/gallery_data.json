@@ -1,0 +1,52 @@
+[
+{
+    "title": "Mountain Landscape",
+    "description": "A majestic mountain range bathed in the golden light of sunset.",
+    "imageUrl": "https://img.freepik.com/free-photo/colorful-design-with-spiral-design_188544-9588.jpg"
+},
+{
+    "title": "Crystal Clear Lake",
+    "description": "A serene lake reflecting the clear blue sky and fluffy white clouds.",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPWP8ulRu03ibC2Ll1pqb_s6A_qE3XP84n9chwqjfxsw&s"
+},
+{
+    "title": "Vibrant Cityscape",
+    "description": "A bustling cityscape with towering skyscrapers and colorful lights.",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ1VuKA1bfF-J9EICmf9n4YvfTkXkhQb4Zln2kVXHZnw&s"
+},
+{
+    "title": "Cozy Cabin",
+    "description": "A charming cabin nestled amongst the trees, perfect for a winter getaway.",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnMqXYBeV1GutjD_JJcUPyltffz1VxlexYl6pXZhuE8A&s"
+},
+{
+    "title": "Tropical Beach",
+    "description": "A pristine beach with white sand, turquoise water, and swaying palm trees.",
+    "imageUrl": "https://burst.shopifycdn.com/photos/photo-of-a-cityscape-with-a-ferris-wheel.jpg?width=1000&format=pjpg&exif=0&iptc=0"
+},
+{
+    "title": "Starry Night Sky",
+    "description": "A breathtaking night sky filled with millions of twinkling stars.",
+    "imageUrl": "https://media.istockphoto.com/id/1322277517/photo/wild-grass-in-the-mountains-at-sunset.jpg?s=612x612&w=0&k=20&c=6mItwwFFGqKNKEAzv0mv6TaxhLN3zSE43bWmFN--J5w="
+},
+{
+    "title": "Ancient Ruins",
+    "description": "Mysterious ruins of an ancient civilization, shrouded in history and mystery.",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1I_6KKZO1P0yG0c27Qn312Lv4rxhChLHyB03pUmtDCQ&s"
+},
+{
+    "title": "Blooming Flowers",
+    "description": "A field of vibrant flowers in full bloom, creating a tapestry of color.",
+    "imageUrl": "https://media.istockphoto.com/id/621695504/photo/beautiful-beach-in-carvoeiro-algarve-portugal.jpg?s=612x612&w=0&k=20&c=azi9oI8WOky6EIz3oOKEXn-EOcUJTPZ3tiy0rjMJZjI="
+},
+{
+    "title": "Waterfall Cascade",
+    "description": "A powerful waterfall cascading down a steep cliff, surrounded by lush greenery.",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIFeTnmky6xz7i4vus6Ldo1fO7eC__tHBNfk0B6sKIHA&s"
+},
+{
+    "title": "Desert Landscape",
+    "description": "A vast and arid desert landscape with towering dunes and a vibrant sunset.",
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW95tI67IbT48zjPz8lZl1r-MCAIajusbTU_49xDz-tg&s"
+}
+]
