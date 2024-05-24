@@ -1,26 +1,69 @@
-import TodoModel from "./TODO.js";
+import TodoModel from "./TodoModel.js";
+
 window.onload = async () => {
 
+    let currentTaskIndex;
     const model = new TodoModel();
-    console.log(model.getTasks());
 
-    const listsContainer = document.querySelector('#lists-container');
+    const listsContainer = document.querySelector("#lists-container");
     const todoHeader = document.querySelector("todo-header");
+    todoHeader.addEventListener("clicked", () => {
+        listsContainer.style.transform = "translateX(0)";
+        todoHeader.state = "tasks";
+    });
 
-    todoHeader.addEventListener("clicked" , () => {
-        listsContainer.style.transform = "translateX(0%)";
-        todoHeader.state="tasks";
-    })
+    
+    const buildTasksList = (tasks) => {
+        const tasksList = document.querySelector("#tasks");
+        tasksList.innerHTML = "";
+        console.log(tasks.item);
+        tasks.forEach((task,index)  => {
+            const li = document.createElement("li");
+            const taskItem = new TaskItem();
+            taskItem.addEventListener("clicked", () => {
+                console.log("item clicked");
+                listsContainer.style.transform = "translateX(-100%)";
+                todoHeader.state = "items";
+                todoHeader.taskName = task.title;
+                buildItemsList(task.item);
+            });
+            taskItem.addEventListener("delete", () => {
+                model.deleteTask(index);
+                buildItemsList(model.getTasks());
+            });
+            taskItem.title = task.title;
 
-    const taskItem = document.querySelector("task-item");
-    taskItem.addEventListener("clicked" , () =>{
-        console.log("clicked");
-        listsContainer.style.transform = "translateX(-100%)";
-        todoHeader.state="items";
-        todoHeader.taskName = "testing";
-    })
-    taskItem.addEventListener("delete!" , () =>{
-        console.log("deleted");
-    })
+            li.append(taskItem);
+            tasksList.append(li);
+            currentTaskIndex = index;
+        });
 
+    }
+
+    const buildItemsList = (item) => {
+        
+        const checkItemList = document.querySelector("#items");
+        checkItemList.innerHTML = "";
+
+        item.forEach(item =>{
+            
+            const li = document.createElement("li")
+            const checkItem = new CheckItem();
+            checkItem.addEventListener("checked" , (ev) =>{
+                console.log(ev.detail.checked);
+            });
+            checkItem.addEventListener("delete", () =>{
+                model.deleteItem();
+                console.log("delete check item");
+            });
+            checkItem.title = item.title;
+            checkItem.checked = item.checked;
+
+            li.append(checkItem);
+            checkItemList.append(li);
+        });
+    }
+
+    
+    buildTasksList(model.getTasks());
 }
