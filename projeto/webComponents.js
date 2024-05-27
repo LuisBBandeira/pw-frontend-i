@@ -105,26 +105,27 @@ class TodoHeader extends HTMLElement {
 }
 customElements.define("todo-header", TodoHeader);
 
-/**Item */
+
+/** ITEM */
 class Item extends HTMLElement {
-    
+
     shadowRoot;
     button;
-    #front;
+    front;
     #touchX;
     #maxX = 84;
     #currentX;
-    constructor(){
-        super();
-        
-        this.shadowRoot = this.attachShadow({mode:'closed'});
 
+    constructor() {
+        super();
+
+        this.shadowRoot = this.attachShadow({mode:'closed'});
     }
 
-    initialize(){
+    initialize() {
 
         this.button = this.shadowRoot.querySelector(".button");
-        this.#front = this.shadowRoot.querySelector(".front");
+        this.front = this.shadowRoot.querySelector(".front");
 
         this.mouseUp = this.mouseUp.bind(this);
         this.mouseMove = this.mouseMove.bind(this);
@@ -134,13 +135,13 @@ class Item extends HTMLElement {
             if(this.#currentX === 0) this.dispatchEvent(new CustomEvent("clicked"));
         }
     }
-    
+
     #mouseDown(ev) {
 
         this.#touchX = ev.x
         document.addEventListener("mouseup", this.mouseUp);
         document.addEventListener("mousemove", this.mouseMove);
-        this.#front.style.transition = 'none';
+        this.front.style.transition = 'none';
         this.#currentX = 0;
     }
 
@@ -151,8 +152,8 @@ class Item extends HTMLElement {
 
         if(this.#currentX === this.#maxX) this.dispatchEvent(new CustomEvent("delete"));
 
-        this.#front.style.transition = 'transform .15s ease-in-out';
-        this.#front.style.transform = 'translateX(0)';
+        this.front.style.transition = 'transform .15s ease-in-out';
+        this.front.style.transform = 'translateX(0)';
 
         this.#touchX = 0;
     }
@@ -162,10 +163,10 @@ class Item extends HTMLElement {
         if(this.#currentX < 0) this.#currentX = 0;
         if(this.#currentX > this.#maxX) this.#currentX = this.#maxX;
 
-        this.#front.style.transform = `translateX(-${this.#currentX}px)`;
+        this.front.style.transform = `translateX(-${this.#currentX}px)`;
     }
-
 }
+
 
 /**TASK ITEM */
 const taskItemTemplate = document.createElement("template");
@@ -245,13 +246,11 @@ taskItemTemplate.innerHTML = `
 
 
 `
-class TaskItem extends Item{
+class TaskItem extends Item {
 
     static observedAttributes = ['title'];
-
     constructor() {
         super();
-
 
         this.shadowRoot.append(taskItemTemplate.content.cloneNode(true));
         this.initialize();
@@ -263,6 +262,7 @@ class TaskItem extends Item{
             this.shadowRoot.querySelector("label").innerText = newVal;
         }
     }
+
 
     get title() {
         return this.getAttribute("title");
@@ -283,12 +283,6 @@ checkItemTemplate.innerHTML = `
         position: relative;
         overflow: hidden;
         width: 100%;
-        cursor: pointer;
-    }
-
-    .button:active .front label,
-    .button:active .front .icon {
-        transform: scale(0.9);
     }
 
     .front {
@@ -309,7 +303,7 @@ checkItemTemplate.innerHTML = `
         overflow: hidden;
         text-overflow: ellipsis;
         user-select: none;
-        color: var(--color-text-dark);
+        color: var(--color-text-light);
     }
 
     .icon {
@@ -318,14 +312,13 @@ checkItemTemplate.innerHTML = `
         min-width: 32px;
         min-height: 32px;
     }
-
-    .checkbox{
+    .checkbox {
         background-color: var(--color-text-light);
         padding: 5px;
+        cursor: pointer;
     }
-
-    .checkbox svg{
-        display:none;
+    .checkbox svg {
+        display: none;
     }
 
     .back {
@@ -339,10 +332,9 @@ checkItemTemplate.innerHTML = `
     <div class="front">
         <label></label>
         <div class="checkbox icon">
-            <svg width="100%" height="100%"  viewBox="0 0 24.342 24.342"  fill="var(--color-text-dark)">
+            <svg width="100%" height="100%" viewBox="0 0 24.342 24.342" fill="var(--color-text-dark)">
                 <path d="m20.497 2.6458 3.8447 3.865-15.105 15.185-9.2366-9.2856 3.8447-3.865 5.3919 5.4205z"/>
             </svg>
-
         </div>
     </div>
 
@@ -360,15 +352,14 @@ checkItemTemplate.innerHTML = `
 
 class CheckItem extends Item {
 
-    static observedAttributes = ['title' , 'check'];
-
+    static observedAttributes = ['title', 'checked'];
 
     #checkbox;
     #checkicon;
     #isChecked;
     constructor() {
         super();
-
+        
         this.shadowRoot.append(checkItemTemplate.content.cloneNode(true));
 
         this.#checkbox = this.shadowRoot.querySelector(".checkbox");
@@ -377,40 +368,38 @@ class CheckItem extends Item {
         this.#checkbox.onclick = () => {
 
             this.#isChecked = this.#isChecked === "true" ? "false" : "true";
-            this.dispatchEvent(new CustomEvent ("checked" ,{detail:{
-                checked: this.#isChecked
-            }}))
 
-            this.#checkicon.style.display = this.#isChecked === "true" ? "block" : "none"; 
+            this.dispatchEvent(new CustomEvent("checked", {detail: {
+                checked: this.#isChecked
+            }}));
+
+            this.#checkicon.style.display = this.#isChecked === "true" ? "block" : "none";
         }
 
-        
         this.initialize();
     }
 
-    attributeChangedCallback(attrName , oldVal , newVal) {
-
-        switch(attrName){
+    attributeChangedCallback(attrName, oldVal, newVal) {
+        switch (attrName) {
             case 'title':
-                this.shadowRoot.querySelector('label').innerText = newVal;
+                this.shadowRoot.querySelector("label").innerText = newVal;
                 break;
             case 'checked':
-                    this.#isChecked = newVal;
-
-                    this.#checkicon.style.display = this.#isChecked === "true" ? "block" : "none";
+                this.#isChecked = newVal;
+                this.#checkicon.style.display = this.#isChecked === "true" ? "block" : "none";
                 break;
-
+        
             default:
                 break;
         }
     }
 
-    get check(){
-        return this.getAttribute("checked")
+    get checked() {
+        return this.getAttribute("checked");
     }
 
-    set check(val){
-        this.setAttribute("checked" ,val)
+    set checked(val) {
+        this.setAttribute("checked", val);
     }
 
     get title() {
@@ -421,3 +410,82 @@ class CheckItem extends Item {
     }
 }
 customElements.define("check-item", CheckItem);
+
+/**TODO MODAL */
+const todoModalTemplate = document.createElement("template");
+todoModalTemplate.innerHTML = `
+<style>
+    @import url("system.css");
+
+    .modal{
+        position: absolute;
+        width: 590px;
+        height: 402px;
+        top: 239px;
+        left: 105px;
+        padding: 30px 0px 0px 0px;
+        gap: 24px;
+        background-color:var(--color-primary);
+    }
+
+    label{
+        width: 530px;
+        height: 77px;
+        font-size:64px;
+    }
+
+    input{
+        width:530px;
+        padding: 30px 20px 30px 20px;
+        gap: 109px;
+        border: 1px 0px 0px 0px;
+        opacity: 0px;             
+    }
+
+    .icons{
+        display:flex;
+        flex-direction: row;
+        justify-content: flex-end ;
+        gap: 10px;
+    }
+    
+    .icon{
+        width: 128px ;
+        height: 88px;
+        padding: 20px 40px 20px 40px;
+    }
+
+    .box{
+        background-color:var(--color-terciary);
+    }
+
+</style>
+<div class="modal">
+    <label>Add Task</label>
+    <input type="text">
+    <div class="icons">
+        <div class="icon">
+            <svg width="100%" height="100%"  viewBox="0 0 24.342 24.342">
+                <path d="m12.171 8.4754-8.4754-8.4754-3.6954 3.6954 8.4754 8.4754-8.4754 8.4754 3.6954 3.6954 8.4754-8.4754 8.4754 8.4754 3.6954-3.6954-8.4754-8.4754 8.4754-8.4754-3.6954-3.6954z"/>
+            </svg>
+        </div>
+        <div class="box icon">
+            <svg width="100%" height="100%"  viewBox="0 0 24.342 24.342"  fill="var(--color-text-light)">
+                <path d="m20.497 2.6458 3.8447 3.865-15.105 15.185-9.2366-9.2856 3.8447-3.865 5.3919 5.4205z"/>
+            </svg>
+        </div>
+    </div>
+</div>
+`;
+
+class TodoModal extends HTMLElement{
+    
+    shadowRoot;
+    constructor(){
+        super();
+
+        this.shadowRoot = this.attachShadow({mode:'closed'});
+        this.shadowRoot.append(todoModalTemplate.content.cloneNode(true));
+    }
+}
+customElements.define("todo-modal" , TodoModal)
