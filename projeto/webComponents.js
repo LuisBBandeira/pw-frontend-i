@@ -531,17 +531,31 @@ class TodoModal extends HTMLElement {
         this.shadowRoot.querySelector("#cancel").onclick = () => {
             this.hide();
         }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+              this.hide();
+            }
+        });
 
         const input = this.shadowRoot.querySelector("input");
-        this.shadowRoot.querySelector("#confirm").onclick = () => {
-            if(input.value.trim() === "") return;
-            this.dispatchEvent(new CustomEvent("confirm" , {
-                detail: {
-                    value: input.value
-                }
+        const enterClick = () => {
+            if (input.value.trim() === "") return;
+            this.dispatchEvent(new CustomEvent("confirm", {
+              detail: {
+                value: input.value
+              }
             }));
             this.hide();
-        }
+          }
+          
+          this.shadowRoot.querySelector("#confirm").onclick = enterClick;
+          
+          input.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+              enterClick();
+            }
+          });
     }
 
     show(state){
@@ -559,7 +573,7 @@ class TodoModal extends HTMLElement {
 
     hide(){
         this.shadowRoot.querySelector("input").value;
-        this.style.display = "none";        
+        this.style.display = "none";    
     }
 }
 customElements.define("todo-modal", TodoModal);

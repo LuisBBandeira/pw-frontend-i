@@ -8,10 +8,10 @@ window.onload = async () => {
 
     // O teu código aqui...
     const listsContainer = document.querySelector("#lists-container");
-    // const lists = document.querySelector("ul");
-    // lists.forEach(ul =>{
-    //     ul.style.height = `${listsContainer.on}`
-    // });
+    const lists = document.querySelectorAll("ul");
+    lists.forEach(ul => {
+        ul.style.height = `${listsContainer.offsetHeight}px`;
+    });
     const todoHeader = document.querySelector("todo-header");
     todoHeader.state = "tasks";
     todoHeader.addEventListener("clicked", () => {
@@ -40,6 +40,14 @@ window.onload = async () => {
     }
 
     const buildTasksList = (tasks) => {
+        
+        const ul = document.querySelector("#tasks");
+        ul.innerHTML = "";
+        if(tasks.length === 0) {
+            ul.innerHTML = "<li class = 'nd'>Add a task</li>";
+            return;
+        }
+
         const tasksList = document.querySelector("#tasks");
         tasksList.innerHTML = "";
 
@@ -66,6 +74,13 @@ window.onload = async () => {
     }
 
     const buildItemsList = (items) => {
+
+        const ul = document.querySelector("#items");
+        ul.innerHTML = "";
+        if(items.length === 0) {
+            ul.innerHTML = "<li class ='nd'>Add an item</li>";
+            return;
+        }
 
         const checkItemsList = document.querySelector("#items");
         checkItemsList.innerHTML = "";
